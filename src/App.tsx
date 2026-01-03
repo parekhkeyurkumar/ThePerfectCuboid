@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { computeDiagonals, Dimensions, nearIntegerTolerance } from './lib/diagonals';
+import { computeDiagonals, Dimensions } from './lib/diagonals';
+import { CuboidVisualizer } from './components/CuboidVisualizer';
 
 type FieldKey = keyof Dimensions;
 
@@ -106,12 +107,18 @@ const App = () => {
 
   const diagonals = useMemo(() => (dimensions ? computeDiagonals(dimensions) : undefined), [dimensions]);
 
+  const diagStatus = {
+    lb: Boolean(diagonals?.d_lb.isWhole),
+    lh: Boolean(diagonals?.d_lh.isWhole),
+    bh: Boolean(diagonals?.d_bh.isWhole),
+    lbh: Boolean(diagonals?.d_lbh.isWhole)
+  };
+
   const renderValue = (value?: number) => (value !== undefined ? formatNumber(value) : '—');
 
   return (
     <div className="page">
       <header className="hero">
-        <p className="eyebrow">Geometry explorer</p>
         <h1>The Perfect Cuboid</h1>
         <p className="lede">
           Adjust the edges of a cuboid and see how the face and space diagonals behave. Look for the elusive case where
@@ -119,8 +126,8 @@ const App = () => {
         </p>
       </header>
 
-      <main className="cards-grid">
-        <section className="card education">
+      <main className="section-stack">
+        <section className="card education full-width">
           <div className="card-header">
             <h2>What’s a perfect cuboid?</h2>
           </div>
@@ -132,11 +139,27 @@ const App = () => {
           <ul className="bullets">
             <li>The face diagonals come from applying the Pythagorean theorem to each rectangle.</li>
             <li>The space diagonal extends the theorem into three dimensions.</li>
-            <li>We treat values within {nearIntegerTolerance.toExponential()} of an integer as whole numbers to avoid rounding quirks.</li>
           </ul>
         </section>
 
-        <section className="card">
+        <section className="card full-width visualizer-card">
+          <div className="card-header">
+            <h2>Cuboid visualizer</h2>
+            <p className="helper">Thin lines highlight each diagonal. Colors update as values change.</p>
+          </div>
+          <CuboidVisualizer
+            isWhole_lb={diagStatus.lb}
+            isWhole_lh={diagStatus.lh}
+            isWhole_bh={diagStatus.bh}
+            isWhole_lbh={diagStatus.lbh}
+          />
+          <div className="legend" aria-label="Diagonal legend">
+            <span className="legend-item legend-item--whole">Green = whole</span>
+            <span className="legend-item legend-item--not">Red = not whole</span>
+          </div>
+        </section>
+
+        <section className="card full-width">
           <div className="card-header">
             <h2>Dimensions</h2>
             <p className="helper">Positive whole numbers only (1-9999).</p>
@@ -155,44 +178,44 @@ const App = () => {
               </button>
             ))}
           </div>
-
-          <p className="hint">Tolerance for whole numbers: {nearIntegerTolerance.toExponential()}.</p>
         </section>
 
-        <section className="card">
-          <div className="card-header">
-            <h2>Face diagonals</h2>
-            <p className="helper">Each uses Pythagoras on a face of the cuboid.</p>
+        <section className="dual-grid">
+          <div className="card">
+            <div className="card-header">
+              <h2>Face diagonals</h2>
+              <p className="helper">Each uses Pythagoras on a face of the cuboid.</p>
+            </div>
+            <div className="diag-grid">
+              <article className="diag">
+                <div className="diag-label">d_lb = √(l² + b²)</div>
+                <div className="diag-value">{renderValue(diagonals?.d_lb.value)}</div>
+                <WholeBadge isWhole={diagStatus.lb} />
+              </article>
+              <article className="diag">
+                <div className="diag-label">d_lh = √(l² + h²)</div>
+                <div className="diag-value">{renderValue(diagonals?.d_lh.value)}</div>
+                <WholeBadge isWhole={diagStatus.lh} />
+              </article>
+              <article className="diag">
+                <div className="diag-label">d_bh = √(b² + h²)</div>
+                <div className="diag-value">{renderValue(diagonals?.d_bh.value)}</div>
+                <WholeBadge isWhole={diagStatus.bh} />
+              </article>
+            </div>
           </div>
-          <div className="diag-grid">
-            <article className="diag">
-              <div className="diag-label">d_lb = √(l² + b²)</div>
-              <div className="diag-value">{renderValue(diagonals?.d_lb.value)}</div>
-              <WholeBadge isWhole={Boolean(diagonals?.d_lb.isWhole)} />
-            </article>
-            <article className="diag">
-              <div className="diag-label">d_lh = √(l² + h²)</div>
-              <div className="diag-value">{renderValue(diagonals?.d_lh.value)}</div>
-              <WholeBadge isWhole={Boolean(diagonals?.d_lh.isWhole)} />
-            </article>
-            <article className="diag">
-              <div className="diag-label">d_bh = √(b² + h²)</div>
-              <div className="diag-value">{renderValue(diagonals?.d_bh.value)}</div>
-              <WholeBadge isWhole={Boolean(diagonals?.d_bh.isWhole)} />
-            </article>
-          </div>
-        </section>
 
-        <section className="card">
-          <div className="card-header">
-            <h2>Space diagonal</h2>
-            <p className="helper">The body diagonal from one vertex to the opposite corner.</p>
+          <div className="card">
+            <div className="card-header">
+              <h2>Space diagonal</h2>
+              <p className="helper">The body diagonal from one vertex to the opposite corner.</p>
+            </div>
+            <article className="diag diag--large">
+              <div className="diag-label">d_lbh = √(l² + b² + h²)</div>
+              <div className="diag-value diag-value--large">{renderValue(diagonals?.d_lbh.value)}</div>
+              <WholeBadge isWhole={diagStatus.lbh} />
+            </article>
           </div>
-          <article className="diag diag--large">
-            <div className="diag-label">d_lbh = √(l² + b² + h²)</div>
-            <div className="diag-value diag-value--large">{renderValue(diagonals?.d_lbh.value)}</div>
-            <WholeBadge isWhole={Boolean(diagonals?.d_lbh.isWhole)} />
-          </article>
         </section>
       </main>
     </div>
