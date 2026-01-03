@@ -1,0 +1,35 @@
+.visualizer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0 0.75rem;
+}
+
+.visualizer svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+}
+
+.cube-frame .edge {
+  fill: none;
+  stroke: #9ca3af;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.diag {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.diag--whole {
+  stroke: #16a34a;
+}
+
+.diag--not {
+  stroke: #dc2626;
+}
