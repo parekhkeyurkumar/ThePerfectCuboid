@@ -119,7 +119,23 @@ const App = () => {
         </p>
       </header>
 
-      <main className="grid">
+      <main className="cards-grid">
+        <section className="card education">
+          <div className="card-header">
+            <h2>What’s a perfect cuboid?</h2>
+          </div>
+          <p>
+            A perfect cuboid would have every edge length, each face diagonal, and the space diagonal all as whole numbers.
+            Mathematicians have searched for centuries, but it is still unknown whether such a cuboid exists.
+          </p>
+          <p className="callout">Try to find one! Adjust the values and watch the diagonals.</p>
+          <ul className="bullets">
+            <li>The face diagonals come from applying the Pythagorean theorem to each rectangle.</li>
+            <li>The space diagonal extends the theorem into three dimensions.</li>
+            <li>We treat values within {nearIntegerTolerance.toExponential()} of an integer as whole numbers to avoid rounding quirks.</li>
+          </ul>
+        </section>
+
         <section className="card">
           <div className="card-header">
             <h2>Dimensions</h2>
@@ -177,22 +193,6 @@ const App = () => {
             <div className="diag-value diag-value--large">{renderValue(diagonals?.d_lbh.value)}</div>
             <WholeBadge isWhole={Boolean(diagonals?.d_lbh.isWhole)} />
           </article>
-        </section>
-
-        <section className="card education">
-          <div className="card-header">
-            <h2>What’s a perfect cuboid?</h2>
-          </div>
-          <p>
-            A perfect cuboid would have every edge length, each face diagonal, and the space diagonal all as whole numbers.
-            Mathematicians have searched for centuries, but it is still unknown whether such a cuboid exists.
-          </p>
-          <p className="callout">Try to find one! Adjust the values and watch the diagonals.</p>
-          <ul className="bullets">
-            <li>The face diagonals come from applying the Pythagorean theorem to each rectangle.</li>
-            <li>The space diagonal extends the theorem into three dimensions.</li>
-            <li>We treat values within {nearIntegerTolerance.toExponential()} of an integer as whole numbers to avoid rounding quirks.</li>
-          </ul>
         </section>
       </main>
     </div>
