@@ -2,8 +2,8 @@
   color-scheme: light;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   line-height: 1.6;
-  background: #0b1221;
-  color: #e8ecf5;
+  background: #f5f7fb;
+  color: #1f2937;
 }
 
 * {
@@ -13,6 +13,8 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background: #f5f7fb;
+  color: #1f2937;
 }
 
 .page {
@@ -29,12 +31,12 @@ body {
 .hero h1 {
   font-size: clamp(2rem, 5vw, 2.75rem);
   margin: 0.25rem 0;
-  color: #fff;
+  color: #0f172a;
 }
 
 .hero .lede {
   margin: 0;
-  color: #c2c8d7;
+  color: #374151;
 }
 
 .eyebrow {
@@ -42,21 +44,25 @@ body {
   letter-spacing: 0.08em;
   font-weight: 700;
   font-size: 0.75rem;
-  color: #91a4ff;
+  color: #2563eb;
   margin: 0;
 }
 
-.grid {
+.cards-grid {
   display: grid;
-  gap: 1rem;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
 }
 
 .card {
-  background: #121a2d;
-  border: 1px solid #1d2940;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 16px;
   padding: 1.25rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .card-header h2 {
@@ -65,7 +71,7 @@ body {
 
 .card-header .helper {
   margin: 0.25rem 0 0;
-  color: #9aa5bd;
+  color: #4b5563;
   font-size: 0.95rem;
 }
 
@@ -88,19 +94,19 @@ body {
 input[type='text'] {
   padding: 0.65rem 0.75rem;
   border-radius: 10px;
-  border: 1px solid #24314d;
-  background: #0b1120;
-  color: #e8ecf5;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
   font-size: 1rem;
 }
 
 input[type='text']:focus {
-  outline: 2px solid #91a4ff;
-  border-color: #91a4ff;
+  outline: 2px solid #2563eb;
+  border-color: #2563eb;
 }
 
 .input-error {
-  color: #ffb4a4;
+  color: #b91c1c;
   font-size: 0.9rem;
 }
 
@@ -114,20 +120,20 @@ input[type='text']:focus {
 .preset {
   padding: 0.5rem 0.75rem;
   border-radius: 999px;
-  border: 1px solid #24314d;
-  background: #0f1628;
-  color: #e8ecf5;
+  border: 1px solid #d1d5db;
+  background: #f3f4f6;
+  color: #111827;
   cursor: pointer;
   font-weight: 600;
 }
 
 .preset:hover {
-  border-color: #91a4ff;
+  border-color: #2563eb;
 }
 
 .hint {
   margin: 0.25rem 0 0;
-  color: #7f8bad;
+  color: #4b5563;
   font-size: 0.9rem;
 }
 
@@ -139,8 +145,8 @@ input[type='text']:focus {
 .diag {
   padding: 0.75rem;
   border-radius: 12px;
-  background: #0f1729;
-  border: 1px solid #1c2940;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
 }
 
 .diag--large {
@@ -148,14 +154,14 @@ input[type='text']:focus {
 }
 
 .diag-label {
-  color: #9aa5bd;
+  color: #4b5563;
   font-size: 0.95rem;
 }
 
 .diag-value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: #fff;
+  color: #0f172a;
 }
 
 .diag-value--large {
@@ -173,35 +179,32 @@ input[type='text']:focus {
 }
 
 .pill--good {
-  background: #0f3b24;
-  color: #7df3b3;
+  background: #d1fae5;
+  color: #065f46;
 }
 
 .pill--bad {
-  background: #2c1a1a;
-  color: #ffb4a4;
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .education .callout {
-  background: linear-gradient(120deg, #0f3b24, #0f1729);
+  background: #eef2ff;
   padding: 0.75rem 1rem;
   border-radius: 12px;
-  color: #d4ffe5;
-  border: 1px solid #1f3f32;
+  color: #1f2937;
+  border: 1px solid #c7d2fe;
 }
 
 .bullets {
   margin: 0.75rem 0 0;
   padding-left: 1.25rem;
-  color: #c2c8d7;
+  color: #1f2937;
 }
 
-@media (min-width: 720px) {
-  .grid {
+@media (min-width: 768px) {
+  .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .grid > .card:nth-of-type(3) {
-    grid-column: span 2;
+    align-items: stretch;
   }
 }
