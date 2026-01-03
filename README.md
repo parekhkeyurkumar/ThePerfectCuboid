@@ -7,7 +7,6 @@ A mobile-first React + TypeScript single-page app that explores the perfect cubo
 - Real-time diagonal calculations for any positive whole-number edges (1-9999)
 - Inline validation with friendly messages
 - Preset buttons (includes 44 × 117 × 240) to jump-start exploration
-- Whole-number badges using a 1e-9 tolerance to smooth floating rounding
 - Educational panel summarizing the perfect cuboid problem and nudging users to experiment
 
 ## Getting started (local)
